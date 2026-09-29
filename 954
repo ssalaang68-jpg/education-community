@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="평범한(?) 교육사 공식 커뮤니티">
+<meta name="theme-color" content="#536dfe">
+
+<title>평범한(?) 교육사 공식 커뮤니티</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Noto Sans KR",
+        sans-serif;
+    background: #080d18;
+    color: #f1f4ff;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10, 16, 30, 0.94);
+    backdrop-filter: blur(15px);
+    border-bottom: 1px solid #293654;
+}
+
+.header-inner {
+    max-width: 1100px;
+    margin: auto;
+    padding: 15px;
+}
+
+.top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.logo {
+    font-size: 21px;
+    font-weight: 900;
+}
+
+.logo small {
+    display: block;
+    color: #8997b5;
+    font-size: 11px;
+    margin-top: 3px;
+}
+
+nav {
+    display: flex;
+    gap: 7px;
+    overflow-x: auto;
+    padding-top: 13px;
+}
+
+nav button {
+    border: 1px solid #31405f;
+    background: #151f35;
+    color: white;
+    border-radius: 10px;
+    padding: 9px 14px;
+    white-space: nowrap;
+}
+
+nav button.active {
+    background: #536dfe;
+    border-color: #536dfe;
+}
+
+main {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px 15px 40px;
+}
+
+.hero {
+    padding: 30px;
+    border-radius: 22px;
+    background:
+        linear-gradient(135deg, #172448, #10182b);
+    border: 1px solid #2b3b5e;
+    margin-bottom: 18px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.25);
+}
+
+.hero h1 {
+    margin: 0 0 8px;
+    font-size: clamp(26px, 6vw, 38px);
+}
+
+.hero p {
+    color: #b7c2dc;
+    line-height: 1.6;
+}
+
+.buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    border: 1px solid #334263;
+    background: #151f35;
+    color: white;
+    border-radius: 11px;
+    padding: 10px 14px;
+}
+
+.btn.primary {
+    background: #536dfe;
+    border-color: #536dfe;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(230px, 1fr);
+    gap: 16px;
+}
+
+.card {
+    background: #10192b;
+    border: 1px solid #293754;
+    border-radius: 17px;
+    padding: 17px;
+    margin-bottom: 13px;
+}
+
+.post {
+    cursor: pointer;
+    transition: border-color .15s;
+}
+
+.post:hover {
+    border-color: #596fff;
+}
+
+.tag {
+    display: inline-block;
+    padding: 4px 9px;
+    border-radius: 99px;
+    background: #202c4b;
+    color: #aebaff;
+    font-size: 11px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 850;
+    margin: 9px 0 6px;
+}
+
+.meta {
+    color: #8997b7;
+    font-size: 12px;
+}
+
+.body {
+    color: #c1c9dc;
+    line-height: 1.6;
+    margin-top: 10px;
+}
+
+.video {
+    margin-top: 13px;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: 13px;
+    background: #05080f;
+}
+
+.video iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 7px;
+}
+
+.stat {
+    background: #0c1424;
+    border: 1px solid #263451;
+    border-radius: 12px;
+    text-align: center;
+    padding: 11px 5px;
+}
+
+.stat b {
+    display: block;
+    font-size: 19px;
+}
+
+.stat span {
+    color: #8794b1;
+    font-size: 11px;
+}
+
+.heart {
+    border: 1px solid #49304a;
+    background: #211727;
+    color: #ff8bbd;
+    border-radius: 999px;
+    padding: 8px 13px;
+    margin-top: 12px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 11px;
+    margin: 6px 0 13px;
+    border-radius: 10px;
+    border: 1px solid #30405f;
+    background: #0b1322;
+    color: white;
+    outline: none;
+}
+
+textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+label {
+    color: #aeb9d0;
+    font-size: 12px;
+}
+
+.comment {
+    border-top: 1px solid #27334d;
+    padding: 12px 0;
+}
+
+.comment-name {
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.empty {
+    text-align: center;
+    color: #8290ac;
+    padding: 45px 15px;
+}
+
+.notice {
+    color: #93a0bc;
+    background: #0c1424;
+    border: 1px solid #263451;
+    padding: 11px;
+    border-radius: 11px;
+    font-size: 12px;
+}
+
+footer {
+    text-align: center;
+    color: #66738f;
+    font-size: 11px;
+    padding: 25px;
+}
+
+@media (max-width: 760px) {
+
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .side {
+        display: none;
+    }
+
+    .hero {
+        padding: 23px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="header-inner">
+
+<div class="top">
+
+<div class="logo">
+🪖 평범한(?) 교육사 공식
+<small>Official Roblox Creator Community</small>
+</div>
+
+<button class="btn primary" onclick="writePost()">
+✏️ 글쓰기
+</button>
+
+</div>
+
+<nav id="navigation"></nav>
+
+</div>
+
+</header>
+
+
+<main>
+
+<section class="hero">
+
+<h1>평범한(?) 교육사 공식 커뮤니티</h1>
+
+<p>
+Roblox 이야기부터 영상, 교육사 이야기까지
+함께 이야기하는 공식 커뮤니티입니다.
+</p>
+
+<div class="buttons">
+
+<button class="btn primary" onclick="writePost()">
+✏️ 게시글 작성
+</button>
+
+<button class="btn" onclick="changeCategory('영상')">
+🎬 영상 보기
+</button>
+
+</div>
+
+</section>
+
+
+<div class="layout">
+
+<section id="content"></section>
+
+
+<aside class="side">
+
+<div class="card">
+
+<h3>📊 커뮤니티</h3>
+
+<div class="stats">
+
+<div class="stat">
+<b id="posts">0</b>
+<span>게시글</span>
+</div>
+
+<div class="stat">
+<b id="comments">0</b>
+<span>댓글</span>
+</div>
+
+<div class="stat">
+<b id="videos">0</b>
+<span>영상</span>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>🔥 인기 태그</h3>
+
+<span class="tag">#Roblox</span>
+<span class="tag">#교육사</span>
+<span class="tag">#영상</span>
+<span class="tag">#동굴부대</span>
+
+</div>
+
+
+<div class="card">
+
+<h3>📌 공식 커뮤니티</h3>
+
+<p class="meta">
+평범한(?) 교육사의 공식 커뮤니티입니다.
+</p>
+
+</div>
+
+</aside>
+
+</div>
+
+</main>
+
+
+<footer>
+© 2026 평범한(?) 교육사 · Official Community
+</footer>
+
+
+<script>
+
+const defaultPosts = [
+
+{
+id: 1,
+category: "공지",
+title: "🎉 평범한(?) 교육사 공식 커뮤니티 오픈!",
+body: "평범한(?) 교육사 공식 커뮤니티에 오신 것을 환영합니다!",
+author: "관리자",
+date: "2026.09.27",
+likes: 12,
+youtube: ""
+},
+
+{
+id: 2,
+category: "영상",
+title: "🎬 군사경찰 몰래 치킨 먹기",
+body: "교육사에서 벌어진 재미있는 Roblox 영상을 만나보세요!",
+author: "평범한(?) 교육사",
+date: "2026.09.27",
+likes: 8,
+youtube: ""
+},
+
+{
+id: 3,
+category: "Roblox",
+title: "🪖 동굴부대 근황",
+body: "Roblox 동굴부대에서 발견한 재미있는 장면을 공유합니다.",
+author: "상등병",
+date: "2026.09.26",
+likes: 5,
+youtube: ""
+}
+
+];
+
+
+let posts =
+JSON.parse(localStorage.getItem("official_posts"))
+|| defaultPosts;
+
+
+let comments =
+JSON.parse(localStorage.getItem("official_comments"))
+|| [];
+
+
+let currentCategory = "전체";
+
+
+function save() {
+
+localStorage.setItem(
+"official_posts",
+JSON.stringify(posts)
+);
+
+localStorage.setItem(
+"official_comments",
+JSON.stringify(comments)
+);
+
+updateStats();
+
+}
+
+
+function escapeHTML(text) {
+
+return String(text)
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+
+function getYoutubeId(url) {
+
+if (!url) return "";
+
+try {
+
+const parsed = new URL(url);
+
+if (
+parsed.hostname.includes("youtube.com")
+) {
+
+return parsed.searchParams.get("v") || "";
+
+}
+
+if (
+parsed.hostname.includes("youtu.be")
+) {
+
+return parsed.pathname.substring(1);
+
+}
+
+} catch {}
+
+return "";
+
+}
+
+
+function youtube(url) {
+
+const id = getYoutubeId(url);
+
+if (!id) return "";
+
+return `
+
+<div class="video">
+
+<iframe
+src="https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}"
+title="YouTube video"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+allowfullscreen>
+</iframe>
+
+</div>
+
+`;
+
+}
+
+
+function updateStats() {
+
+document.getElementById("posts").textContent =
+posts.length;
+
+document.getElementById("comments").textContent =
+comments.length;
+
+document.getElementById("videos").textContent =
+posts.filter(p => p.category === "영상" || p.youtube).length;
+
+}
+
+
+function createNavigation() {
+
+const nav =
+document.getElementById("navigation");
+
+nav.innerHTML = "";
+
+[
+"전체",
+"공지",
+"자유",
+"Roblox",
+"영상"
+].forEach(category => {
+
+const button =
+document.createElement("button");
+
+button.textContent = category;
+
+if (category === currentCategory) {
+button.classList.add("active");
+}
+
+button.onclick = () =>
+changeCategory(category);
+
+nav.appendChild(button);
+
+});
+
+}
+
+
+function changeCategory(category) {
+
+currentCategory = category;
+
+render();
+
+}
+
+
+function render() {
+
+createNavigation();
+
+const filtered =
+currentCategory === "전체"
+? posts
+: posts.filter(
+post => post.category === currentCategory
+);
+
+const content =
+document.getElementById("content");
+
+
+if (!filtered.length) {
+
+content.innerHTML =
+`
+<div class="card empty">
+아직 게시글이 없습니다.
+</div>
+`;
+
+updateStats();
+
+return;
+
+}
+
+
+content.innerHTML =
+filtered.map(post => `
+
+<article
+class="card post"
+onclick="openPost(${post.id})"
+>
+
+<span class="tag">
+#${escapeHTML(post.category)}
+</span>
+
+<div class="title">
+${escapeHTML(post.title)}
+</div>
+
+<div class="meta">
+${escapeHTML(post.author)}
+·
+${escapeHTML(post.date)}
+</div>
+
+<div class="body">
+${escapeHTML(post.body)}
+</div>
+
+${youtube(post.youtube)}
+
+<div>
+
+<button
+class="heart"
+onclick="event.stopPropagation(); like(${post.id})"
+>
+❤️ ${post.likes}
+</button>
+
+</div>
+
+</article>
+
+`).join("");
+
+updateStats();
+
+}
+
+
+function like(id) {
+
+const post =
+posts.find(p => p.id === id);
+
+if (!post) return;
+
+post.likes++;
+
+save();
+
+render();
+
+}
+
+
+function openPost(id) {
+
+const post =
+posts.find(p => p.id === id);
+
+if (!post) return;
+
+const postComments =
+comments.filter(
+comment => comment.postId === id
+);
+
+
+document.getElementById("content").innerHTML = `
+
+<div class="card">
+
+<button
+class="btn"
+onclick="render()"
+>
+← 목록으로
+</button>
+
+<br><br>
+
+<span class="tag">
+#${escapeHTML(post.category)}
+</span>
+
+<h2>
+${escapeHTML(post.title)}
+</h2>
+
+<div class="meta">
+${escapeHTML(post.author)}
+·
+${escapeHTML(post.date)}
+</div>
+
+<div class="body">
+${escapeHTML(post.body)
+.replaceAll("\n","<br>")}
+</div>
+
+${youtube(post.youtube)}
+
+<br>
+
+<button
+class="heart"
+onclick="likeDetail(${post.id})"
+>
+❤️ ${post.likes}
+</button>
+
+<hr style="
+border:0;
+border-top:1px solid #27334d;
+margin:22px 0;
+">
+
+<h3>
+💬 댓글
+</h3>
+
+${
+postComments.length
+?
+postComments.map(comment => `
+
+<div class="comment">
+
+<div class="comment-name">
+${escapeHTML(comment.author)}
+</div>
+
+<div>
+${escapeHTML(comment.text)}
+</div>
+
+</div>
+
+`).join("")
+:
+`<div class="meta">
+아직 댓글이 없습니다.
+</div>`
+}
+
+<br>
+
+<input
+id="commentInput"
+placeholder="댓글을 입력하세요"
+>
+
+<button
+class="btn primary"
+onclick="addComment(${post.id})"
+>
+댓글 등록
+</button>
+
+</div>
+
+`;
+
+}
+
+
+function likeDetail(id) {
+
+const post =
+posts.find(p => p.id === id);
+
+if (!post) return;
+
+post.likes++;
+
+save();
+
+openPost(id);
+
+}
+
+
+function addComment(id) {
+
+const input =
+document.getElementById("commentInput");
+
+const text =
+input.value.trim();
+
+if (!text) {
+
+alert("댓글을 입력해주세요.");
+
+return;
+
+}
+
+
+comments.push({
+
+postId: id,
+
+author: "방문자",
+
+text: text
+
+});
+
+save();
+
+openPost(id);
+
+}
+
+
+function writePost() {
+
+document.getElementById("content").innerHTML = `
+
+<div class="card">
+
+<h2>
+✏️ 게시글 작성
+</h2>
+
+<label>
+게시판
+</label>
+
+<select id="newCategory">
+
+<option>자유</option>
+<option>Roblox</option>
+<option>영상</option>
+
+</select>
+
+
+<label>
+제목
+</label>
+
+<input
+id="newTitle"
+maxlength="100"
+placeholder="제목을 입력하세요"
+>
+
+
+<label>
+내용
+</label>
+
+<textarea
+id="newBody"
+placeholder="내용을 입력하세요"
+></textarea>
+
+
+<label>
+YouTube 주소
+</label>
+
+<input
+id="newYoutube"
+placeholder="https://www.youtube.com/watch?v=..."
+>
+
+
+<div class="notice">
+
+YouTube 주소를 입력하면
+게시글에서 영상을 바로 볼 수 있습니다.
+
+</div>
+
+<br>
+
+<button
+class="btn"
+onclick="render()"
+>
+취소
+</button>
+
+<button
+class="btn primary"
+onclick="submitPost()"
+>
+게시하기
+</button>
+
+</div>
+
+`;
+
+}
+
+
+function submitPost() {
+
+const category =
+document.getElementById("newCategory").value;
+
+const title =
+document.getElementById("newTitle").value.trim();
+
+const body =
+document.getElementById("newBody").value.trim();
+
+const youtubeUrl =
+document.getElementById("newYoutube").value.trim();
+
+
+if (!title || !body) {
+
+alert("제목과 내용을 입력해주세요.");
+
+return;
+
+}
+
+
+posts.unshift({
+
+id: Date.now(),
+
+category: category,
+
+title: title,
+
+body: body,
+
+author: "방문자",
+
+date: new Date()
+.toLocaleDateString("ko-KR"),
+
+likes: 0,
+
+youtube: youtubeUrl
+
+});
+
+
+save();
+
+currentCategory = "전체";
+
+render();
+
+}
+
+
+render();
+
+</script>
+
+</body>
+</html>
